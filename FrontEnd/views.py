@@ -66,7 +66,6 @@ def profile_actions(request):
     return render(request, 'profile_actions.html', {'user': user, 'profile_exists': profile_exists})
 
 
-
 def profile(request, user_id):
     user = get_object_or_404(User, id=user_id)
 
