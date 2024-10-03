@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import BackEnd.urls
 import FrontEnd.urls
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static
 from Blog import settings
@@ -24,7 +23,6 @@ from Blog import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('BackEnd/', include(BackEnd.urls)),
     path('FrontEnd/', include(FrontEnd.urls)),
 ]
 
