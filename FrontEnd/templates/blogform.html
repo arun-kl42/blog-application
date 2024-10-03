@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}'s Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'script/tailwind.config.js' %}"></script>
+</head>
+<body>
+    <section class="bg-gray-50 min-h-screen flex items-center justify-center">
+        <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+            <div class="md:w-full px-16">
+                <h2 class="font-bold text-2xl">{{ user.username }}'s adding a new post</h2>
+                <p class="text-sm mt-4">Share your joy with us...</p>
+
+                <form action="{% url 'create_blog' %}" method="post" enctype="multipart/form-data" class="flex flex-col gap-4">
+                    {% csrf_token %}
+                    <input type="text" name="title" placeholder="Title" class="p-2 mt-8 w-96 rounded-xl border">
+                    <input type="text" name="tags" placeholder="Tags" class="p-2 mt-8 w-96 rounded-xl border">
+                    <textarea name="description" class="p-2 w-96 rounded-xl border" placeholder="Description"></textarea>
+                    <input type="file" name="image" placeholder="Profile" class="p-2 w-96 rounded-xl border">
+                    <button class="bg-black text-white rounded-xl py-2 hover:scale-105 duration-300">Set</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

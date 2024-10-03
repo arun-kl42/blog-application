@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'script/tailwind.config.js' %}"></script>
+
+</head>
+<body class="overflow-x-hidden leading-8 ">
+
+    <nav class="w-full fixed px-5 lg:px-8 xl:px-[8%]
+     py-4 flex items-center justify-between z-50">
+
+        <ul class="hidden md:flex items-center gap-6 lg:gap-10 rounded-full px-48 ml-20 py-3 bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent">
+            <li class="-pl-24 pr-10"><a href="#top">Home</a></li>
+            <li><a href="#about">About</a></li>
+
+            <li class="pl-10"><a href="{% url 'blog' %}"><img src="{% static 'images/logo.png' %}" alt="logo" class="w-10 cursor-pointer mr-14"></a></li>
+
+            <li class="pl-5"><a href="#services">Services</a></li>
+            <li class="pl-5"><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="flex items-center gap-4">
+
+            {% if user.is_authenticated %}
+            <a href="#"  class="hidden lg:flex items-center gap-3 px-8 mt-3 ml-5  py-2.5 border border-gray-500 rounded-full dark:border-white/50">
+                <p>{{user.username}}</p>
+            </a>
+            {% else %}
+            <a href="{% url 'login' %}" class="hidden lg:flex items-center gap-3 px-12 mt-3 ml-5  py-2.5 border border-gray-500 rounded-full dark:border-white/50">
+                <p>Login/Register</p>
+                <img src="{% static 'images/play btn.png' %}" alt="" class="w-3">
+            </a>
+            {% endif %}
+
+            <button class="block md:hidden ml-3" onclick="openMenu()">
+                <img src="{% static 'images/dark menu.png' %}" alt="" class="w-6 hidden dark:block">
+
+            </button>
+        </div>
+        <!-- mobile menu -->
+        <ul id="sideMenu" class="flex md:hidden flex-col py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 gap-4 ">
+            <div class="absolute right-6 top-6">
+                <img src="{% static 'images/closebtn.png' %}" alt="" class="w-5 cursor-pointer" onclick="closeMenu()">
+            </div>
+            <li><a href="#top" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#services" onclick="closeMenu()">Services</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact me</a></li>
+        </ul>
+    </nav>
+    {% block content %}
+    <!-- header -->
+
+    <div class="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4 ">
+
+                <h3 class="flex items-end gap-2 text-xl md:text-2xl mb-3">Welcome to blog</h3>
+                <h1 class="text-3xl sm:text-6xl lg:text-[66px] ">Blog</h1>
+                <p class="max-w-2xl mx-auto">Post your memorable moments</p>
+                <div class="flex flex-col sm:flex-row items-center gap-4 mt-4">
+                    <a href="#contact" class="px-10 py-3 border rounded-full bg-black text-wrap flex items-center gap-2 text-white dark:bg-white dark:text-black">Contact Us</a>
+                    <a href="{% url 'blog' %}" class="px-10 py-3 border border-black rounded-full  flex items-center gap-2 dark:border-white">Explore Now</a>
+                </div>
+
+
+    </div>
+    <!-- slide -->
+
+    <div class="w-full px-[12%] py-10 scroll-mt-20">
+            <div class="flex [&:hover>div]:w-16 [&>div:hover]:w-[30rem]">
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/sunset.jpg' %}" class="h-full object-cover group-hover:rotate-3 group-hover:scale-125 transition-all " alt="">
+                </div>
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/dolphin.jpg' %}" class="h-full object-cover group-hover:rotate-12 group-hover:scale-125 transition-all " alt="">
+
+                </div>
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/lake.jpg' %}" class="h-full object-cover group-hover:rotate-12 group-hover:scale-125 transition-all " alt="">
+
+                </div>
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/river.jpg' %}" class="h-full object-cover group-hover:rotate-12 group-hover:scale-125 transition-all " alt="">
+                </div>
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/cocunut.jpg' %}" class="h-full object-cover group-hover:rotate-3 group-hover:scale-125 transition-all " alt="">
+                </div>
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/drs.jpg'%}" class="h-full object-cover group-hover:rotate-3 group-hover:scale-125 transition-all " alt="">
+                </div>
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/van.jpg' %}" class="h-full object-cover group-hover:rotate-3 group-hover:scale-125 transition-all " alt="">
+                </div>
+                <div class="group relative h-96 w-[30rem] shadow-lg shadow-black/30 hover:w-[30rem] cursor-pointer overflow-hidden transition-all duration-200">
+                    <img src="{% static 'images/road.jpg' %}" class="h-full object-cover group-hover:rotate-3 group-hover:scale-125 transition-all " alt="">
+                </div>
+            </div>
+</div>
+
+
+    <!-- About -->
+     <div id="about" class="w-full px-[12%] py-10 scroll-mt-20">
+        <h4 class="text-center mb-2 text-lg ">Introduction</h4>
+        <h2 class="text-center text-5xl">About me</h2>
+        <div class="flex w-full flex-col lg:flex-row items-center gap-20 my-20 ">
+            <div class="max-w-max mx-auto relative">
+                <img src="{% static 'images/women.jpg' %}" alt="" class="w-64 sm:w-80 rounded-3xl max-w-none">
+            </div>
+            <div class="flex-1">
+                <p class="mb-10 max-w-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ea inventore, vitae quas laborum ad fugit cum tempora quidem? Quia saepe itaque incidunt debitis excepturi? Molestias quidem accusamus corrupti id.</p>
+                <ul class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl">
+                    <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-[#fcf4ff] hover:-translate-y-1 duration-500 hover:shadow-[4px_4px_0_#000] dark:border-white dark:hover:shadow-[4px_4px_0_#fff] dark:hover:bg-[#11001F] ">
+
+                        <h3 class="my-4 font-semibold text-gray-700 dark:text-white">Languages</h3>
+                    </li>
+                    <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-[#fcf4ff] hover:-translate-y-1 duration-500 hover:shadow-[4px_4px_0_#000]  dark:border-white dark:hover:shadow-[4px_4px_0_#fff] dark:hover:bg-[#11001F]">
+
+                        <h3 class="my-4 font-semibold text-gray-700 dark:text-white">Education</h3>
+                    </li>
+                    <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-[#fcf4ff] hover:-translate-y-1 duration-500 hover:shadow-[4px_4px_0_#000]  dark:border-white dark:hover:shadow-[4px_4px_0_#fff] dark:hover:bg-[#11001F]">
+
+                        <h3 class="my-4 font-semibold text-gray-700 dark:text-white">Projects</h3>
+                    </li>
+                </ul>
+            </div>
+        </div>
+     </div>
+     <!-- services -->
+
+     <div id="services" class="w-full px-[12%] py-10 scroll-mt-20">
+        <h4 class="text-center mb-2 text-lg ">What i offer</h4>
+        <h2 class="text-center text-5xl">My services</h2>
+        <p class="text-center max-w-2xl mx-auto mt-5 mb-12 ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum voluptatibus quibusdam expedita iure fuga, impedit fugit veniam quo doloremque ipsum vel deleniti inventore nisi ratione odio! Eos asperiores in nulla.</p>
+
+        <div class="grid grid-cols-2 gap-6 my-10 ml-20">
+            <div class="border border-gray-400 rounded-lg px-8 py-12 hover:shadow-[4px_4px_0_#000] cursor-pointer hover:bg-[#dbdbdb] hover:translate-y-1 duration-500 dark:hover:shadow-[4px_4px_0_#fff] dark:hover:bg-[#11001F]">
+                <img src="" alt="">
+                <h3 class="text-lg my-4 text-gray-700 dark:text-white">Web design</h3>
+                <p class="text-sm text-gray-600 leading-5 dark:text-white">Web development is the process of buliding, programming...</p>
+                <a href="" class="flex items-center gap-2 text-sm mt-5 ">Read more <img src="images/right-arrow-dark.png" alt="" class="w-4"></a>
+            </div>
+            <div class="border border-gray-400 rounded-lg px-8 py-12 hover:shadow-[4px_4px_0_#000] cursor-pointer hover:bg-[#dbdbdb] hover:translate-y-1 duration-500 dark:hover:shadow-[4px_4px_0_#fff] dark:hover:bg-[#11001F]">
+                <img src="" alt="">
+                <h3 class="text-lg my-4 text-gray-700 dark:text-white">Editing</h3>
+                <p class="text-sm text-gray-600 leading-5 dark:text-white">Web development is the process of buliding, programming...</p>
+                <a href="" class="flex items-center gap-2 text-sm mt-5 ">Read more <img src="images/right-arrow-dark.png" alt="" class="w-4"></a>
+            </div>
+
+        </div>
+     </div>
+
+
+     <div id="contact" class="w-full px-[12%] py-10 scroll-mt-20 bg">
+        <h4 class="text-center mb-2 text-lg ">Connect with us</h4>
+        <h2 class="text-center text-5xl">Get in touch</h2>
+        <p class="text-center max-w-2xl mx-auto mt-5 mb-12 ">If you have any questions, comments, feedback, please use the form below...I'd love to hear from you!</p>
+        <form action="" class="max-w-2xl mx-auto ">
+            <div class="grid grid-cols-auto gap-6 mt-10 mb-8">
+                <input type="text" placeholder="Enter your name" class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white">
+                <input type="email" placeholder="Enter your email" class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white">
+            </div>
+            <textarea name="" id="" rows="6" placeholder="Enter your message" class="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6"></textarea>
+            <button class="py-3 px-7 w-max flex items-center justify-between gap-2 rounded-full mx-auto border border-gray-500 hover:bg-black hover:text-white dark:bg-white dark:text-black">Submit</button>
+        </form>
+     </div>
+    {% endblock %}
+
+     <!-- footer -->
+
+     <div class="mt-20">
+        <div class="text-center">
+
+            <img src="{% static 'images/logo.png' %}" alt="" class="w-36 mx-auto mb-2">
+            <div class="w-max flex items-center gap-2 mx-auto">
+                <img src="/images/mail.png" alt="" class="w-6">
+                abc@gamil.com
+            </div>
+        </div>
+        <div class="text-center sm:flex items-center justify-between border-t border-gray-400 mx-[10%] mt-12 py-6">
+            <p>@ 2024 Arun Asokan.All rights reserved.</p>
+            <ul class="flex items-center gap-10 justify-center mt-4 sm:mt-0">
+                <li><a href=""></a>Instagram</li>
+                <li><a href=""></a>Github</li>
+                <li><a href=""></a>Linkeden</li>
+            </ul>
+        </div>
+     </div>
+
+
+
+    <script src="./script.js"></script>
+</body>
+</html>

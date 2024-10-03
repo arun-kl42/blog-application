@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}'s Profile Actions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'script/tailwind.config.js' %}"></script>
+</head>
+<body class="overflow-x-hidden leading-8 ">
+
+    <nav class="w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50">
+        <ul class="hidden md:flex items-center gap-6 lg:gap-10 rounded-full px-52 ml-24 py-3 bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent">
+            <li class="-pl-24 pr-10"><a href="#top">Home</a></li>
+            <li><a href="{% url 'blogform' %}">Post</a></li>
+            <li class="pl-10"><a href=""><img src="{% static 'images/logo.png' %}" alt="logo" class="w-10 cursor-pointer mr-14"></a></li>
+            <li class="pl-5"><a href="#">Profile</a></li>
+            <li class="pl-5"><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        <div class="flex items-center gap-4">
+            <button class="block md:hidden ml-3" onclick="openMenu()">
+                <img src="{% static 'images/menu.png' %}" alt="" class="w-6 dark:hidden">
+                <img src="{% static 'images/dark_menu.png' %}" alt="" class="w-6 hidden dark:block">
+            </button>
+        </div>
+        <!-- mobile menu -->
+        <ul id="sideMenu" class="flex md:hidden flex-col py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 gap-4 ">
+            <div class="absolute right-6 top-6">
+                <img src="{% static 'images/closebtn.png' %}" alt="" class="w-5 cursor-pointer" onclick="closeMenu()">
+            </div>
+            <li><a href="#top" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#services" onclick="closeMenu()">Services</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="w-full h-screen relative">
+        <video src="{% static 'video/home.mp4' %}" class="w-full h-full object-cover z-0" autoplay loop muted></video>
+    </div>
+
+<div class="bg-gray-50 min-h-screen flex items-center justify-center">
+    <div class="bg-gray-100 flex flex-col rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+        <h1 class="text-2xl font-bold">Welcome to Your Blog</h1>
+
+        <!-- Check if the user is authenticated -->
+        {% if user.is_authenticated %}
+            {% with blog_user=user.bloguser %}
+                {% if blog_user %}
+                    <a href="{% url 'profilecard' user.id %}">
+                        <button class="bg-black text-white rounded-full px-4 py-2 mt-3">View Profile</button>
+                    </a>
+                {% else %}
+                    <p class="mt-4">You don't have a profile yet. Please create one.</p>
+                    <a href="{% url 'profile' user.id %}">
+                        <button class="bg-blue-500 text-white rounded-full px-4 py-2 mt-2">Create Profile</button>
+                    </a>
+                {% endif %}
+            {% endwith %}
+        {% else %}
+            <p>Please log in to view your blog and profile.</p>
+        {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

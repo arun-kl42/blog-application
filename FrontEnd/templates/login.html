@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'tailwind.config.js' %}"></script>
+</head>
+<body>
+    <section class="bg-gray-50 min-h-screen flex items-center justify-center">
+        <div class="bg-grey-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+            <div class="md:w-1/2 px-16">
+                <h2 class="font-bold text-2xl">Sign-Up</h2>
+                <p class="text-sm mt-4">If you already a member, easily log in.</p>
+
+                <form action="{% url 'save_login' %}" method="post" class="flex flex-col gap-4">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username" class="p-2 mt-8 rounded-xl border">
+                    <input type="password" name="password" placeholder="Password" class="p-2 rounded-xl border">
+                    <button type="submit" class="bg-black text-white rounded-xl py-2 hover:scale-105 duration-300">Login</button>
+                </form>
+                <div class="pt-5">
+                    <hr class="border-gray-400">
+                </div>
+                <div class="text-xs flex justify-between items-center pt-2 mt-3">
+                    <p>Don't have an account/</p>
+                    <a href="{% url 'register' %}">
+                        <button class="py-2 px-5 bg-white border rounded-xl hover:scale-105 duration-300">Register</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class= "md:block hidden w-1/2 ">
+                <img  src="{% static 'images/blog.jpg' %}"  class="rounded-2xl" alt="">
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

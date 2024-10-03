@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow p-4">
+        <h1 class="text-3xl font-bold ml-96">Blog List</h1>
+        <a href="{% url 'blog' %}">
+            <button class="bg-black text-white rounded-xl py-2 px-3 hover:scale-105 duration-300 -mt-10 ">Back to blog</button>
+        </a>
+    </header>
+
+    <main class="container mx-auto mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for blog in blogs %}
+                <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                    <h2 class="text-xl font-semibold">{{ blog.title }}</h2>
+
+                    <p class="mt-2 text-gray-600">{{ blog.description|truncatewords:20 }}</p>
+                    <div class="mt-4">
+                        <a href="{% url 'blog_detail' blog.id %}" class="text-blue-500 hover:underline">Read more</a>
+                    </div>
+                    <div class="mt-2">
+                        <form action="{% url 'delete_blog' blog.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+            {% empty %}
+                <p>No blog posts available.</p>
+            {% endfor %}
+
+
+        </div>
+    </main>
+</body>
+</html>

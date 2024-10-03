@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-8 p-4 bg-white rounded-lg shadow">
+        <h2 class="text-2xl font-semibold">Confirm Delete</h2>
+        <p>Are you sure you want to delete the blog post "{{ blog.title }}"?</p>
+        <form action="{% url 'delete_blog' blog.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Yes, Delete</button>
+            <a href="{% url 'list' %}" class="bg-gray-300 text-black px-4 py-2 rounded">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

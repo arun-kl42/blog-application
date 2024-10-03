@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update {{ user.username }}'s Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'script/tailwind.config.js' %}"></script>
+</head>
+<body>
+    <section class="bg-gray-50 min-h-screen flex items-center justify-center">
+        <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+            <div class="md:w-full px-16">
+                <h2 class="font-bold text-2xl">Update {{ user.username }}'s Profile</h2>
+                <p class="text-sm mt-4">Edit your information below...</p>
+
+                <!-- Display profile image if available -->
+                {% if blog_user and blog_user.profile_image %}
+                    <img src="{{ blog_user.profile_image.url }}" alt="{{ user.username }}'s profile image" class="w-24 h-24 rounded-full mb-4">
+                {% else %}
+                    <img src="{% static 'default-profile.png' %}" alt="Default profile image" class="w-24 h-24 rounded-full mb-4">
+                {% endif %}
+
+                <form action="{% url 'save_blog_user' %}" method="post" enctype="multipart/form-data" class="flex flex-col gap-4">
+                    {% csrf_token %}
+                    <input type="text" name="username" value="{{ user.username }}" readonly placeholder="Username" class="p-2 mt-8 w-96 rounded-xl border">
+                    <input type="file" name="profile" class="p-2 w-96 rounded-xl border" placeholder="Profile Image">
+                    <textarea name="bio" class="p-2 w-96 rounded-xl border" placeholder="Share your thoughts">{{ blog_user.bio|default_if_none:'' }}</textarea>
+                    <button class="bg-black text-white rounded-xl py-2 hover:scale-105 duration-300">Update</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
